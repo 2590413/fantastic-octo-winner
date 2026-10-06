@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:BeeDone"
+    xmlns:Models="using:BeeDone"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="BeeDone"
     mc:Ignorable="d">
@@ -12,6 +13,12 @@
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
+
+    <!--<StackPanel>
+        <TextBlock x:Name="txtNom"/>
+        <Button Click="btnValider_Click" Content="Saluer" />
+        <TextBox x:Name="txtMessage" />
+    </StackPanel>-->
 
     <Grid
         Padding="16"
@@ -29,7 +36,7 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1.5*" />
         </Grid.ColumnDefinitions>
-        <!--  Bannière - titre  -->
+          <!--Bannière - titre-->  
         <Border
             Grid.Row="0"
             Grid.ColumnSpan="2"
@@ -37,11 +44,11 @@
             Background="#FFE27A"
             CornerRadius="8">
             <StackPanel Orientation="Horizontal" Spacing="12">
-                <!--
-                    Image : Honeybee (3D), Fluent Emoji, Microsoft
+                
+                    <!--Image : Honeybee (3D), Fluent Emoji, Microsoft
                     https://github.com/microsoft/fluentui-emoji
-                    Licence MIT, Copyright (c) Microsoft Corporation
-                -->
+                    Licence MIT, Copyright (c) Microsoft Corporation-->
+                
                 <Image
                     Width="32"
                     Height="32"
@@ -60,7 +67,7 @@
             </StackPanel>
         </Border>
 
-        <!--  Zone d'ajout  -->
+          <!--Zone d'ajout-->  
         <Grid
             Grid.Row="1"
             Grid.Column="0"
@@ -71,15 +78,18 @@
             </Grid.ColumnDefinitions>
 
             <TextBox
+                x:Name="txtNouvelleTache"
                 Grid.Column="0"
                 Header="Nouvelle tâche"
                 PlaceholderText="Ex. : Réviser WinUI" />
 
-            <!--  Bouton d'ajout  -->
+              <!--Bouton d'ajout-->  
             <Button
+                x:Name="btnAjoutTache"
                 Grid.Column="1"
                 VerticalAlignment="Bottom"
                 AutomationProperties.Name="Ajouter la tâche"
+                Click="btnAjoutTache_Click"
                 Background="#FFC93C"
                 Foreground="#1A1A1A">
                 <StackPanel Orientation="Horizontal" Spacing="8">
@@ -89,7 +99,7 @@
             </Button>
         </Grid>
 
-        <!--  Encadré de la liste  -->
+          <!--Encadré de la liste-->  
         <Border
             Grid.Row="2"
             Grid.Column="0"
@@ -98,23 +108,21 @@
             BorderBrush="#FFC93C"
             BorderThickness="1.5"
             CornerRadius="8">
-            <ListView AutomationProperties.Name="Liste des tâches">
-                <ListViewItem>
+            <ListView x:Name="lvTaches" AutomationProperties.Name="Liste des tâches" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:Tache"
+                </ListView.ItemTemplate>
+                    
+                <<!--ListViewItem>
                     <StackPanel Padding="0,12">
                         <TextBlock Text="Remettre le projet de session" />
                         <TextBlock FontSize="12" Text="05-10-2026 - Urgent et important" />
                     </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Padding="0,12">
-                        <TextBlock Text="Réparer la fuite d'eau" />
-                        <TextBlock FontSize="12" Text="05-10-2026 - Urgent et important" />
-                    </StackPanel>
-                </ListViewItem>
+                </ListViewItem>-->
             </ListView>
         </Border>
 
-        <!--  Encadré des détails  -->
+          <!--Encadré des détails-->  
         <Border
             Grid.Row="2"
             Grid.Column="1"
@@ -171,16 +179,16 @@
                 <TextBlock FontSize="12" Text="Ajoutée le 01-10-2026 à 14 h 25" />
 
 
-                <!--  Suppression d'une tâche  -->
+                  <!--Suppression d'une tâche-->  
 
-                <!--<Button
+                <Button
                     Background="#FFD6D6"
                     Content="Supprimer la tâche sélectionnée"
-                    Foreground="#8B1A1A" />-->
+                    Foreground="#8B1A1A" />
             </StackPanel>
         </Border>
 
-        <!--  Suppression d'une tâche : déplacée pour la démo  -->
+          <!--Suppression d'une tâche : déplacée pour la démo-->  
         <Button
             Grid.Row="3"
             Grid.Column="0"
